@@ -9,7 +9,7 @@ if ($conn_todo->connect_error) {
 }
 
 // 设置编码，防止中文乱码
-$conn_todo->set_charset("utf8");
+$conn_todo->set_charset("utf8mb4");
 
 $query = $conn_todo->prepare("SELECT SessionKey, Open FROM sessions WHERE ID = ? ORDER BY Number DESC LIMIT 1");
 $query->bind_param("s", $userId);

@@ -1,8 +1,8 @@
 <?php
-$sessionKey = $_POST['sessionKey'];
-$user = $_POST['user'];
+$sessionKey = $_GET['sessionKey'];
+$userId = $_GET['userId'];
 
-if (!isset($sessionKey, $user)) {
+if (!isset($sessionKey, $userId)) {
     http_response_code(400);
     die("Invalid request.");
 }

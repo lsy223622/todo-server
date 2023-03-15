@@ -1,10 +1,8 @@
 <?php
-require_once 'db_credentials.php';
-
 $queryUserId = $_GET['userId'] ?? null;
-$key = $_GET['key'] ?? null;
+$userKey = $_GET['userKey'] ?? null;
 
-if (!isset($queryUserId, $key)) {
+if (!isset($queryUserId, $userKey)) {
     http_response_code(400);
     die("Invalid request.");
 }
@@ -14,6 +12,7 @@ if (!ctype_digit($queryUserId)) {
     die("Invalid user ID");
 }
 
+require_once 'db_credentials.php';
 $conn_todo = mysqli_connect("localhost", DB_USER, DB_PASS, DB_NAME);
 
 // 检查连接是否成功
@@ -23,14 +22,14 @@ if ($conn_todo->connect_error) {
 }
 
 // 查询 Key
-$stmt = $conn_todo->prepare("SELECT Key FROM userid WHERE ID = ? LIMIT 1");
+$stmt = $conn_todo->prepare("SELECT UserKey FROM userid WHERE ID = ? LIMIT 1");
 $stmt->bind_param("i", $queryUserId);
 $stmt->execute();
-$queryKey = $stmt->get_result()->fetch_assoc()['Key'];
+$queryKey = $stmt->get_result()->fetch_assoc()['UserKey'];
 $stmt->close();
 
 // 对比 Key
-if (!hash_equals($key, $queryKey)) {
+if (!hash_equals($userKey, $queryKey)) {
     $conn_todo->close();
     die("Authentification failed.");
 }
