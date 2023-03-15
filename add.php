@@ -2,22 +2,31 @@
 $sessionKey = $_GET['sessionKey'];
 $userId = $_GET['userId'];
 $todoInfo = $_GET['todoInfo'];
-$todoInfo = json_decode($todoInfo, true);
 
-if (!isset($sessionKey, $userId)) {
+if (!isset($sessionKey) || empty($sessionKey) || !isset($userId) || empty($userId)) {
     http_response_code(400);
     die("Invalid request.");
 }
+if (!isset($todoInfo) || empty($todoInfo)) {
+    http_response_code(400);
+    die("Invalid todoInfo.");
+}
+
+$todoInfo = json_decode($todoInfo, true);
 
 require_once('conn_todo.php');
 
 // 添加 todo
 $query = $conn_todo->prepare("INSERT INTO todos (UserID, Title, Content, AddDate, Deadline, Priority, Finished) VALUES (?, ?, ?, ?, ?, ?, ?)");
-$query->bind_param("issssii", $userId, $todoInfo['title'], $todoInfo['content'], $todoInfo['addDate'], $todoInfo['deadline'], $todoInfo['priority'], $todoInfo['finished']);
+$title = mysqli_real_escape_string($conn_todo, $todoInfo['title']);
+$content = mysqli_real_escape_string($conn_todo, $todoInfo['content']);
+$addDate = mysqli_real_escape_string($conn_todo, $todoInfo['addDate']);
+$deadline = mysqli_real_escape_string($conn_todo, $todoInfo['deadline']);
+$priority = mysqli_real_escape_string($conn_todo, $todoInfo['priority']);
+$finished = mysqli_real_escape_string($conn_todo, $todoInfo['finished']);
+$query->bind_param("issssii", $userId, $title, $content, $addDate, $deadline, $priority, $finished);
 $query->execute();
 $query->close();
-
-echo($userId.$todoInfo['title'].$todoInfo['content'].$todoInfo['addDate'].$todoInfo['deadline'].$todoInfo['priority'].$todoInfo['finished']);
 
 $conn_todo->close();
 echo("OK")

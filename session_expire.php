@@ -9,7 +9,7 @@ if ($conn_todo->connect_error) {
 }
 
 // 把所有过期的 session 的 open 置为 0
-$query = $conn_todo->prepare("UPDATE sessions SET Open = 0 WHERE Open = 1 AND ExpiryDate < NOW()");
+$query = $conn_todo->prepare("UPDATE sessions SET Open = 0 WHERE Open = 1 AND ExpiryTime < NOW()");
 $query->execute();
 $query->close();
 
