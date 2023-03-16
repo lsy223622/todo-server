@@ -1,7 +1,7 @@
 <?php
-// 验证 sessionKey 和 userId 的合法性
 $sessionKey = $_GET['sessionKey'];
 $userId = $_GET['userId'];
+// 验证 sessionKey 和 userId 的合法性
 if (!isset($sessionKey) || empty($sessionKey) || !is_string($sessionKey) || !isset($userId) || empty($userId) || !is_numeric($userId)) {
     http_response_code(400);
     die("Invalid request.");
