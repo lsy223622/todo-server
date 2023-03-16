@@ -8,5 +8,4 @@ $query->execute();
 $query->close();
 
 $conn_todo->close();
-echo("OK");
-?>
+echo ("OK");

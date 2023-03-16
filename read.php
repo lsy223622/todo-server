@@ -15,4 +15,3 @@ $query->close();
 $conn_todo->close();
 
 echo json_encode($todos, JSON_UNESCAPED_UNICODE);
-?>

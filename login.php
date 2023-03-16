@@ -69,4 +69,3 @@ if ($stmt->execute()) {
 $stmt->close();
 
 $conn_todo->close();
-?>
