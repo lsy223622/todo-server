@@ -56,13 +56,13 @@ if ($result->num_rows > 0) {
     $stmt->close();
 }
 
-// 生成 sessionKey 和 expiryDate
+// 生成 sessionKey 和 expiryTime
 $sessionKey = base64_encode(random_int(100000000, 999999999));
-$expiryDate = date("Y-m-d H:i:s", time() + 1800);
+$expiryTime = date("Y-m-d H:i:s", time() + 1800);
 
 // 添加记录到 Sessions 表
 $stmt = $conn_todo->prepare("INSERT INTO sessions (Time, ID, SessionKey, ExpiryTime, Open) VALUES (NOW(), ?, ?, ?, TRUE)");
-$stmt->bind_param("iss", $queryUserId, $sessionKey, $expiryDate);
+$stmt->bind_param("iss", $queryUserId, $sessionKey, $expiryTime);
 if ($stmt->execute()) {
     echo $sessionKey;
 }
