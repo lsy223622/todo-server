@@ -1,4 +1,5 @@
 <?php
+
 require_once('authconnect.php');
 
 // 把当前 Session 的 ExpiryTime 更新为 30 分钟后
@@ -8,4 +9,4 @@ $query->execute();
 $query->close();
 
 $conn_todo->close();
-echo ("OK");
+echo("OK");
