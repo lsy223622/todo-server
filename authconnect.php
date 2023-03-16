@@ -1,4 +1,5 @@
 <?php
+
 $sessionKey = $_GET['sessionKey'];
 $userId = $_GET['userId'];
 // 验证 sessionKey 和 userId 的合法性

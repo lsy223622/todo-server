@@ -1,4 +1,5 @@
 <?php
+
 require_once('authconnect.php');
 
 // 获取 number
@@ -15,5 +16,4 @@ $query->execute();
 $query->close();
 
 $conn_todo->close();
-echo ("OK")
-?>
+echo("OK");

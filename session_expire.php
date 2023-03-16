@@ -1,4 +1,5 @@
 <?php
+
 require_once('db_credentials.php');
 
 // 连接数据库
@@ -16,4 +17,3 @@ $query->close();
 
 $conn_todo->close();
 echo("OK");
-?>
