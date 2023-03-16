@@ -1,7 +1,7 @@
 <?php
 require_once('authconnect.php');
 
-// 按 Deadline 顺序列出所有未完成的 todo
+// 按 deadline 顺序列出所有未完成的 Todo
 $query = $conn_todo->prepare("SELECT Number, UserID, Title, Content, AddTime, Deadline, Priority, Finished FROM todos WHERE UserID = ? AND Finished = 0 ORDER BY Deadline");
 $query->bind_param("s", $userId);
 $query->execute();

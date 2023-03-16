@@ -10,7 +10,7 @@ if (!isset($todoInfo) || empty($todoInfo)) {
 
 $todoInfo = json_decode($todoInfo, true);
 
-// 根据 Number 修改 todo
+// 根据 number 修改 Todo
 $query = $conn_todo->prepare("UPDATE todos SET Title = ?, Content = ?, Deadline = ?, Priority = ?, Finished = ? WHERE UserID = ? AND Number = ?");
 $title = mysqli_real_escape_string($conn_todo, $todoInfo['title']);
 $content = mysqli_real_escape_string($conn_todo, $todoInfo['content']);

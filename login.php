@@ -2,16 +2,19 @@
 $queryUserId = $_GET['userId'] ?? null;
 $userKey = $_GET['userKey'] ?? null;
 
+// 检查参数是否存在
 if (!isset($queryUserId, $userKey)) {
     http_response_code(400);
     die("Invalid request.");
 }
 
+// 检查参数是否合法
 if (!ctype_digit($queryUserId)) {
     http_response_code(400);
     die("Invalid user ID");
 }
 
+// 连接数据库
 require_once 'db_credentials.php';
 $conn_todo = mysqli_connect("localhost", DB_USER, DB_PASS, DB_NAME);
 
@@ -34,7 +37,7 @@ if (!hash_equals($userKey, $queryKey)) {
     die("Authentification failed.");
 }
 
-// 查询最后一条相同ID的记录
+// 查询最后一条相同 ID 的记录
 $stmt = $conn_todo->prepare("SELECT Number FROM sessions WHERE ID = ? ORDER BY Number DESC LIMIT 1");
 $stmt->bind_param("i", $queryUserId);
 $stmt->execute();
@@ -53,7 +56,7 @@ if ($result->num_rows > 0) {
     $stmt->close();
 }
 
-// 生成 SessionKey 和 ExpiryDate
+// 生成 sessionKey 和 expiryDate
 $sessionKey = base64_encode(random_int(100000000, 999999999));
 $expiryDate = date("Y-m-d H:i:s", time() + 1800);
 

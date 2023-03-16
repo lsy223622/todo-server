@@ -10,7 +10,7 @@ if (!isset($todoInfo) || empty($todoInfo)) {
 
 $todoInfo = json_decode($todoInfo, true);
 
-// 添加 todo
+// 添加 Todo
 $query = $conn_todo->prepare("INSERT INTO todos (UserID, Title, Content, AddTime, Deadline, Priority, Finished) VALUES (?, ?, ?, ?, ?, ?, ?)");
 $title = mysqli_real_escape_string($conn_todo, $todoInfo['title']);
 $content = mysqli_real_escape_string($conn_todo, $todoInfo['content']);
