@@ -1,4 +1,5 @@
 <?php
+
 $queryUserId = $_GET['userId'] ?? null;
 $userKey = $_GET['userKey'] ?? null;
 

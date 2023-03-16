@@ -1,4 +1,5 @@
 <?php
+
 require_once('authconnect.php');
 
 // 获取 todoInfo
@@ -23,4 +24,4 @@ $query->execute();
 $query->close();
 
 $conn_todo->close();
-echo ("OK");
+echo("OK");
